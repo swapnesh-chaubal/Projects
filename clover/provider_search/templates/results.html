@@ -22,7 +22,7 @@
 
             {% if doctors %}
                 <ul>
-                {% for doctor in doctors %}
+                {% for doctor in doctors.items %}
                     <li>{{ doctor.first_name }} {{ doctor.last_name }}</li>
                     <ul>
                     <li>Specialties: 
@@ -30,14 +30,15 @@
                         {{ specialty.specialty_name}}
                     {% endfor %}
                     </li>
-                    <li>{{ doctor.Organization.org_legal_name }} </li>
-                    <li>{{ doctor.address1 }}</li>
-                    <li>Address: {{ doctor.address2 }}</li>
-                    <li>{{ doctor.zipcode }}</li>
-                    <ul>
+                    <li>Organization:{{ doctor.Organization.org_legal_name }} </li>
+                    <li>Address: {{ doctor.address_line1 }}, NJ {{ doctor.zipcode}} </li>
+                    </ul>
+                    </br>
                 {% endfor %}
+                </ul>
             {% endif %}
-
+            {% if doctors.has_prev %}<a href="{{ url_for('results', page=doctors.prev_num) }}">&lt;&lt; Previous</a>{% else %}&lt;&lt; Previous{% endif %} | 
+            {% if doctors.has_next %}<a href="{{ url_for('results', page=doctors.next_num) }}">Next &gt;&gt;</a>{% else %}Next &gt;&gt;{% endif %}
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="../static/js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
 

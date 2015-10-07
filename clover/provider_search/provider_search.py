@@ -13,28 +13,21 @@ app.config['SECRET_KEY'] = '\x81Q\x01\x17\xae\xb9Oq\x14oS\xf3>c6\x9fS\xbcmX\xa9\
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'providers.db')
 
 db = SQLAlchemy(app)
-PAGE_SIZE = 20
+PAGE_SIZE = 3
 
 @app.route('/results')
-def results():
+@app.route('/results/<int:page>')
+def results(page=1):
     
     zipcode = session['zipcode'] 
     specialty = session['specialty']
-    start_page_number = session['start_page_number']
-    end_page_number = session['end_page_number']
-    
+    #pdb.set_trace()
     specialties = models.Specialty.query.filter_by(specialty_name = specialty).all()
     if len(specialties) == 0:
         return "No specialties found with the name {}".format(specialty)
 
-    #specialty_id = specialties[0].id
-    #all_doctors = db.session().query(models.Specialty).filter(models.Specialty.id==specialty_id).all()
-    #if len(all_doctors) == 0:
-    #    return "No doctors found with the specialties {}".format(specialty)
-    #pdb.set_trace()
-    doctors_in_zip = specialties[0].doctors.filter_by(zipcode = zipcode).order_by(models.Doctor.last_name).paginate(start_page_number, end_page_number, False).items
-
-    return render_template('results.html', specialty=specialty, zipcode=zipcode, doctors=doctors_in_zip)
+    doctors = specialties[0].doctors.filter_by(zipcode = zipcode).order_by(models.Doctor.last_name).paginate(page, PAGE_SIZE, False)
+    return render_template('results.html', specialty=specialty, zipcode=zipcode, doctors=doctors)
 
 @app.route('/', methods=['GET', 'POST'])
 #@app.route('/index', methods=['GET', 'POST'])
@@ -43,8 +36,6 @@ def index():
     if form.validate_on_submit():
         session['zipcode'] = form.zipcode.data
         session['specialty'] = form.specialty.data
-        session['start_page_number'] = 0
-        session['end_page_number'] = PAGE_SIZE
         return redirect(url_for('results'))
     return render_template('index.html', form=form)  # by default looks in the template dir
 
