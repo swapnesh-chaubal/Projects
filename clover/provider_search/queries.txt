@@ -1,0 +1,53 @@
+from interview_prep import db
+from models import Question
+from models import Solution
+from models import Algorithm
+from models import DataStructure
+
+
+from models import Doctor
+from models import Organization
+from models import Speciality
+
+
+select * from doctor where zipcode= '080543188'
+select * from specialty where specialty_name = 'ALLERGY/IMMUNOLOGY'
+
+from provider_search import db
+from models import Doctor, Organization, Specialty
+db.create_all()
+
+
+o = Organization(org_legal_name = "C")
+db.session.add(o)
+db.session.commit()
+
+sp = Specialty(specialty_name="Playing")
+db.session.add(sp)
+db.session.commit()
+
+o = Organization.query.get(1)
+doc = Doctor(last_name="C", first_name="S", zipcode="1234", Organization=o)
+db.session.add(doc)
+
+sp.doctors.append(doc)
+db.session.commit()
+
+
+sp_id = Specialty.query.filter_by(specialty_name = "AUDIOLOGIST").all()[0]
+res = db.session().query(Specialty).filter(Specialty.id==sp_id.id).all()
+doc = res.doctors.filter_by(zipcode = '079607700').all()[0]
+
+
+AUDIOLOGIST
+079607700
+
+                <ul>
+                {% for doctor in doctors %}
+                    <li>doctor.first_name doctor.last_name</li>
+                    <li>* doctor.Organization.org_legal_name</li>
+                    <li>* doctor.address1</li>
+                    <li>* doctor.address2</li>
+                    <li>* doctor.zipcode</li>
+                {% endfor %}
+                </ul>
