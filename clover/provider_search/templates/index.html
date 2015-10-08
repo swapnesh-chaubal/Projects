@@ -25,14 +25,30 @@
 			<form action="" method="post">
             {{ form.hidden_tag() }}
             <table>
-                <tr>
+                <tr {% if form.zipcode.errors|length != 0 %} class="error" {% endif %}>
                     <td>Zipcode: </td>
                     <td>{{ form.zipcode(size=10) }}</td>
                 </tr>
-                <tr>
+                <tr class="error">
+                    <td></td>
+                    <td>
+                    {% if form.zipcode.errors|length != 0 %}
+                    {{ form.zipcode.errors }}
+                    {% endif %}
+                    </td>
+                </tr>
+                 <tr {% if form.specialty.errors|length != 0 %} class="error" {% endif %}>
                     <td>Specialty: </td>
                     <td>{{ form.specialty(size=50) }}</td>
-                </tr>        
+                </tr>
+                <tr class="error">
+                    <td></td>
+                    <td>
+                    {% if form.specialty.errors|length != 0 %}
+                    {{ form.specialty.errors }}
+                    {% endif %}
+                    </td>
+                </tr>
                 <tr>
                     <td></td>
                     <td><button type="submit">Search</button></td>

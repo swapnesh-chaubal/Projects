@@ -15,6 +15,7 @@ select * from specialty where specialty_name = 'ALLERGY/IMMUNOLOGY'
 
 from provider_search import db
 from models import Doctor, Organization, Specialty
+db.drop_all()
 db.create_all()
 
 
@@ -42,12 +43,10 @@ doc = res.doctors.filter_by(zipcode = '079607700').all()[0]
 AUDIOLOGIST
 079607700
 
-                <ul>
-                {% for doctor in doctors %}
-                    <li>doctor.first_name doctor.last_name</li>
-                    <li>* doctor.Organization.org_legal_name</li>
-                    <li>* doctor.address1</li>
-                    <li>* doctor.address2</li>
-                    <li>* doctor.zipcode</li>
-                {% endfor %}
-                </ul>
+CHIROPRACTIC
+080549749
+
+
+select * from specialty where specialty.id =  (select doctor_specialty.specialty_id from doctor_specialty where doctor_specialty.doctor_id = 7419)
+7419 7443
+select * from doctor where doctor.first_name = "STEPHEN" and doctor.last_name="SACHS"

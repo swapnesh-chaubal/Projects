@@ -3,7 +3,7 @@ from flask import Flask, render_template, url_for, request, redirect, session
 from flask_sqlalchemy import SQLAlchemy
 import os
 from forms import ProviderSearchForm
-import pdb
+
 #from models import Specialty, Doctor, Organization
 import models
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -20,8 +20,7 @@ PAGE_SIZE = 3
 def results(page=1):
     
     zipcode = session['zipcode'] 
-    specialty = session['specialty']
-    #pdb.set_trace()
+    specialty = session['specialty'].upper()
     specialties = models.Specialty.query.filter_by(specialty_name = specialty).all()
     if len(specialties) == 0:
         return "No specialties found with the name {}".format(specialty)
@@ -45,8 +44,7 @@ def page_not_found(e):
 
 @app.errorhandler(500)
 def server_error(e):
-    import pdb
-    pdb.set_trace()
+    print(e)
     return render_template('500.html'), 500
 
 

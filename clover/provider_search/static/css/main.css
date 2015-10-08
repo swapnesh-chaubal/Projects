@@ -5,14 +5,13 @@ html {
     font-size: 1em;
     line-height: 1.4;
 }
-
 ::-moz-selection {
-    background: #b3d4fc;
+    background: #60CDE0;
     text-shadow: none;
 }
 
 ::selection {
-    background: #b3d4fc;
+    background: #60CDE0;
     text-shadow: none;
 }
 
@@ -39,6 +38,20 @@ fieldset {
     margin: 0;
     padding: 0;
 }
+
+tr.error td ul {
+    marin-top:0;
+}
+
+tr.submit button {
+    marin-top: 20px;
+}
+
+input, button {
+    marin-lrgy: 10px;
+}
+
+
 
 textarea {
     resize: vertical;
@@ -70,24 +83,23 @@ body {
    =================== */
 
 .header-container {
-    border-bottom: 20px solid #e44d26;
+    border-bottom: 20px solid #60CDE0;
 }
 
 .footer-container,
 .main aside {
-    border-top: 20px solid #e44d26;
+    border-top: 20px solid #60CDE0;
 }
 
 .header-container,
 .footer-container,
 .main aside {
-    background: #f16529;
+    background: #60CDE0;
 }
 
 .title {
     color: white;
 }
-
 /* ==============
     MOBILE: Menu
    ============== */
@@ -156,14 +168,9 @@ nav a:hover {
 
 
 
-
-
-
-
-
-
-
-
+.error, .error input {
+    color: red;
+}
 
 
 
