@@ -16,7 +16,7 @@
 
         <div class="header-container">
             <header class="wrapper clearfix">
-                <h2 class="title">Showing {{ num_of_docs }} doctors who specialize in {{ specialty }} in {{ zipcode }}</h1>
+                <h2 class="title">{% if num_of_docs == 0 %} Sorry, no doctors found {% else %}  Showing {{ num_of_docs }} doctor(s){% endif %} who specialize in {{ specialty }} in {{ zipcode }}</h1>
             </header>
         </div>
 
