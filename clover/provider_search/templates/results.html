@@ -16,7 +16,7 @@
 
         <div class="header-container">
             <header class="wrapper clearfix">
-                <h2 class="title">Search results for doctors who specialize in {{ specialty }} in {{ zipcode }}</h1>
+                <h2 class="title">Showing {{ num_of_docs }} doctors who specialize in {{ specialty }} in {{ zipcode }}</h1>
             </header>
         </div>
 
@@ -26,9 +26,12 @@
                     <li>{{ doctor.first_name }} {{ doctor.last_name }}</li>
                     <ul>
                     <li>Specialties: 
-                    {% for specialty in doctor._doctor_specialty %}
-                        {{ specialty.specialty_name}}
+                    {% set docs_len = doctor._doctor_specialty|length %}
+                    {% for i in range(0, docs_len - 1) %}
+                        {{ doctor._doctor_specialty[i].specialty_name}} ,
+
                     {% endfor %}
+                    {{ doctor._doctor_specialty[docs_len - 1].specialty_name}}
                     </li>
                     <li>Organization:{{ doctor.Organization.org_legal_name }} </li>
                     <li>Address: {{ doctor.address_line1 }}, NJ {{ doctor.zipcode}} </li>

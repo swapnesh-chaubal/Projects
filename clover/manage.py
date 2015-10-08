@@ -1,8 +1,7 @@
 from provider_search import app, db
-from provider_search.models import Doctor, Organization, Specialty
-#from models import Doctor, Organization, Specialty
 from flask.ext.script import Manager, prompt_bool
 from provider_search.ingest import FileParser
+from provider_search.models import Doctor, Organization, Specialty
 import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -24,24 +23,9 @@ def dropdb():
 	    print 'Dropped the DB'
 
 @manager.command
-def ingest_data():
-	print(FILENAME)
-	parser = FileParser()
-	(org_names, speciality_names) = parser.get_orgs_and_specialties(FILENAME)
-	#import pdb
-	#pdb.set_trace()
-	for org in org_names:
-		o = Organization(org_legal_name = org)
-		db.session.add(o)
-	db.session.commit()
-
-	for specialty in speciality_names:
-		s = Speciality(speciality_name= specialty)
-		db.session.add(s)
-	db.session.commit()
-
-	print 'Created Organization names and Speciality names'
-
+def ingest():
+    parser = FileParser()
+    parser.ingest_data(FILENAME)
 
 if __name__ == '__main__':
 	manager.run()

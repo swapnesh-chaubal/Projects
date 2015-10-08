@@ -1,4 +1,3 @@
-import pdb
 import os
 from models import Doctor, Organization, Specialty
 from provider_search import db
@@ -39,7 +38,7 @@ class FileParser():
             first_name = columns[self.column_dict['First Name']].strip()
             if first_name != '':
                  doctor.first_name = first_name
-            #pdb.set_trace() 
+
             address1 = columns[self.column_dict['Line 1 Street Address']].strip()
             if address1 != '':
                  doctor.address_line1 = address1
@@ -105,6 +104,7 @@ class FileParser():
 
         data_file = open(datafilename)
         first_row = True
+        records = 0
         with open(datafilename, 'r') as csvfile:
                 
             columns = reader(csvfile, delimiter=',', quotechar='"')
@@ -114,16 +114,12 @@ class FileParser():
                     first_row = False
                     continue
                 
-                records = 0
-                bulk_write_size = 100   # write every 500 records 
                 state = row[self.column_dict['State']]
                 if state != 'NJ':
                     continue
     
-                #pdb.set_trace()
                 org = self.get_org(row)
                 doctor = self.get_doctor(row)
-                #pdb.set_trace()
                 if org is not None:
                     doctor.Organization = org
                 else:
@@ -131,12 +127,13 @@ class FileParser():
                 
                 db.session.add(doctor)
                 db.session.commit()
-
+                
                 self.add_specialty(row, doctor)
-            
+                records += 1
+                
+                if records % 100 == 0:
+                    print("Adding records. {} records added...".format(records))
+
             print "{} total record(s) of doctors added to the database".format(records)
     
-
-parser = FileParser()
-orgs_specialties = parser.ingest_data("National_Downloadable_File.csv") 
 
