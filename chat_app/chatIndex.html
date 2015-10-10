@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+#header {
+    background-color:black;
+    color:Orange;
+    text-align:center;
+    padding:5px;
+}
+
+#section {
+    width:350px;
+      height:550px;
+    padding:5px;	      
+}
+#messages { list-style-type: none; margin: 0; padding: 0; }
+#messages li { padding: 5px 10px; }
+#footer {
+    background-color:black;
+    color:orange;
+    clear:both;
+    text-align:center;
+   padding:5px;	 	 
+}
+</style>
+</head>
+<body>
+
+<div id="header">
+
+<h1>Welcome to Chatter</h1>
+<font face="Bookman Old Style" </font>
+
+</div>
+
+<div id="section">
+
+<br>
+<body style="background-color:Orange">
+  <form action="">
+    <label id="name">User Name</label>
+    <input id="userName">
+  </br>
+  </br>
+  </br>
+
+<textarea id ="chatList" cols="50" rows="35">
+
+</textarea>
+<label id="status"></label>
+</br>
+    <label id="message">Message</label>
+    <input id="msgText">
+    <button>Send</button>
+  </form>
+
+</br>
+</div>
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+      var socket = io();
+      $('form').submit(function(){
+
+        userName = document.getElementById("userName").value;
+        msgText = document.getElementById("msgText").value;
+
+        if (userName == "" || msgText == "") {
+            document.getElementById("chatList").innerText = "Please enter username";
+            return;
+        }
+
+        var chatMsg = "messageText=" + msgText + "&userName=" + userName;
+        document.getElementById("msgText").value = "";
+        socket.emit('message', chatMsg);
+        return false;
+      });
+
+      socket.on('message', function(msg){
+        document.getElementById("chatList").value = msg;
+      });
+    </script>
+</body>
+</html>
