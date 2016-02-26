@@ -1,0 +1,64 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href="{% static 'bootstrap/images/favicon.ico' %}" rel="icon" type="image/x-icon" />
+      <title>
+        Paradise Consutancy Services
+      </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js?ver=1.4.2"></script>
+</head>
+<body class="backgroundImg">
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">About Us</a>
+      </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <form class="navbar-form navbar-right">
+        <div class="form-group">
+          <input type="text" placeholder="Email" class="form-control">
+          <input type="text" placeholder="Password" class="form-control">
+        </div>
+        <button type="submit" class="btn-signin btn-default">Sign In</button>
+      </form>   
+</div> 
+  </nav>
+    <div class="btn-group-vertical">
+      <a href="#" class="btn btn-default btn-lg">End to End HR Process</a>
+      <a href="#" class="btn btn-default btn-lg">HR Audits</a>
+      <a href="#" class="btn btn-default btn-lg">Talent Hunt</a>
+      <a href="#" class="btn btn-default btn-lg">Performance Management System</a>
+      <a href="#" class="btn btn-default btn-lg">Legal Compliance</a>
+      <a href="#" class="btn btn-default btn-lg">Payroll and Employee Management</a>
+    </div>
+    <div class="name"> Paradise Consultancy Services</div> 
+    <p class="tag-line"> - Consulting matters</p>
+    <div class="logos">
+      <p class="catchphrase">The most innovative companies work with Paradise</p>
+      <img src="{% static 'bootstrap/images/logo1.png' %}" class="logo">
+      <img src="{% static 'bootstrap/images/logo2.jpeg' %}" class="logo">
+      <img src="{% static 'bootstrap/images/logo3.png' %}" class="logo">
+      <img src="{% static 'bootstrap/images/logo4.jpeg' %}" class="logo">
+      <img src="{% static 'bootstrap/images/logo5.png' %}" class="logo">
+      <img src="{% static 'bootstrap/images/logo6.png' %}" class="logo">
+      <img src="{% static 'bootstrap/images/logo7.png' %}" class="logo">
+      <img src="{% static 'bootstrap/images/logo8.jpeg' %}" class="logo">
+      <img src="{% static 'bootstrap/images/logo9.png' %}" class="logo">
+      <img src=".{% static 'bootstrap/images/logo10.png' %}" class="logo">
+    </div>
+
+    </div>
+</body>
+</html>

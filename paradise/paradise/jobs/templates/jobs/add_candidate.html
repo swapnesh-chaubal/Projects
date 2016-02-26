@@ -1,0 +1,31 @@
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<head lang="en">
+
+    <meta charset="UTF-8">
+    <title>Add User</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
+</head>
+
+<body>
+    {% if form.errors %}
+    {% endif %}
+    <div class="well col-md-6">
+        <form role="form" class="form-horizontal" method="post">
+            {% csrf_token %}
+            <table align="center">
+                {{ form.as_table }}
+            </table>
+            </br>
+            <table align="center">
+                <tr>
+                    <th></th>
+                    <th><button type="submit">Add User</button></th>
+                    <th></th>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+</html>
