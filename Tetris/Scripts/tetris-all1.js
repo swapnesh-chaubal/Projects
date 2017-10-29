@@ -459,7 +459,7 @@ function Game(level) {
     currentShape = getNextShape();
 
     background = new Image();
-    background.src = "background.png";
+    //background.src = "background.png";
 
     drawCanvas = function () {
         canvas.fillStyle = "white";
