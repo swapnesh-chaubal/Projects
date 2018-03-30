@@ -1,0 +1,8 @@
+FB part
+* Write campaign to fb
+* make targetting spec from json - done
+* write adset to facebook
+* write skeleton service with single endpoint
+* write a function that writes data to postgres
+* write an actor that writes data to postgres
+
