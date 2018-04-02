@@ -13,22 +13,6 @@ import io.finch.syntax._
 import io.circe.generic.auto._
 import com.twitter.util.Future
 
-//object TestServer extends Service[Request, Response] {
-//
-//  override def apply(req: Request): Future[Response] = message.toServiceAs[Text.Plain].apply(req)
-//
-//  case class Message(message: String)
-//
-//
-//  def currentTime(l: java.util.Locale): String =
-//    java.util.Calendar.getInstance(l).getTime.toString
-//
-//
-//  val message: Endpoint[String] = get("hello") {
-//    Ok("hello")
-//  }
-//}
-
 case class Message(message: String)
 
 case class FullName(firstName: String, lastName: String)
@@ -42,6 +26,10 @@ class ExampleService {
 
   def getFullName(): Future[FullName] =
     Future.value(FullName("Swapnesh", "Chaubal"))
+
+  def acceptMessage(incomingMessage: Message): Future[Message] =
+    Future.value(incomingMessage)
+
 }
 
 object CampainCreation extends TwitterServer {
@@ -57,7 +45,14 @@ object CampainCreation extends TwitterServer {
     exampleService.getFullName().map(Ok)
   }
 
-  val api = (hello :+: fullName).handle {
+  def acceptedMessage: Endpoint[Message] = jsonBody[Message]
+
+  def accept: Endpoint[Message] = post("accept" :: acceptedMessage) {
+    incomingMessage: Message =>
+      exampleService.acceptMessage(incomingMessage).map(Ok)
+  }
+
+  val api = (hello :+: fullName :+: accept).handle {
     case e: Exception => InternalServerError(e)
   }
 
