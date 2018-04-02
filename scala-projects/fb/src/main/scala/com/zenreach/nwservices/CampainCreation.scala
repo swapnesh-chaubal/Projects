@@ -12,6 +12,7 @@ import io.finch.circe._
 import io.finch.syntax._
 import io.circe.generic.auto._
 import com.twitter.util.Future
+import com.zenreach.nwservices.campaigns.entities.TargetingSpec
 
 case class Message(message: String)
 
@@ -27,7 +28,7 @@ class ExampleService {
   def getFullName(): Future[FullName] =
     Future.value(FullName("Swapnesh", "Chaubal"))
 
-  def acceptMessage(incomingMessage: Message): Future[Message] =
+  def acceptMessage(incomingMessage: Seq[TargetingSpec]): Future[Seq[TargetingSpec]] =
     Future.value(incomingMessage)
 
 }
@@ -45,10 +46,10 @@ object CampainCreation extends TwitterServer {
     exampleService.getFullName().map(Ok)
   }
 
-  def acceptedMessage: Endpoint[Message] = jsonBody[Message]
+  def acceptedMessage: Endpoint[Seq[TargetingSpec]] = jsonBody[Seq[TargetingSpec]]
 
-  def accept: Endpoint[Message] = post("accept" :: acceptedMessage) {
-    incomingMessage: Message =>
+  def accept: Endpoint[Seq[TargetingSpec]] = post("accept" :: acceptedMessage) {
+    incomingMessage: Seq[TargetingSpec] =>
       exampleService.acceptMessage(incomingMessage).map(Ok)
   }
 
