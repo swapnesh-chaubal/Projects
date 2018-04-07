@@ -16,6 +16,7 @@ trait FacebookConversions {
       .setFieldCountry(customLocation.country)
       .setFieldLatitude(customLocation.latitude.toDouble)
       .setFieldLongitude(customLocation.longitude.toDouble)
+      .setFieldAddressString(customLocation.address_string)
   }
 
   implicit val zrCustomLocToFBCustomLoc
@@ -32,7 +33,6 @@ trait FacebookConversions {
       geoLocation.custom_locations.map(_.as[TargetingGeoLocationCustomLocation])
 
     new TargetingGeoLocation()
-      .setFieldCountries(geoLocation.countries.asJava)
       .setFieldLocationTypes(geoLocation.location_types.asJava)
       .setFieldCustomLocations(customLocations.asJava)
 
@@ -50,7 +50,6 @@ trait FacebookConversions {
     new Targeting()
       .setFieldAgeMin(targetingSpec.age_min)
       .setFieldAgeMax(targetingSpec.age_max)
-      .setFieldCountries(targetingSpec.geo_locations.countries.asJava)
       .setFieldDevicePlatforms(targetingSpec.device_platforms
         .map(EnumDevicePlatforms.valueOf _)
         .asJava)
