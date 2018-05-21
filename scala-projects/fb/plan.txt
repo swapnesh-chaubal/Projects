@@ -1,8 +1,13 @@
 FB part
-* Write campaign to fb
+* Write campaign to fb - done
 * make targetting spec from json - done
-* write adset to facebook
-* write skeleton service with single endpoint
+* write adset to facebook - done
+* write ad to facebook - done
+* write skeleton service with single endpoint - done
 * write a function that writes data to postgres
-* write an actor that writes data to postgres
+* write to logentries
+* write to rollbar
+* make case class for campagin service endpoint
+* unmarshall campaign service json
+* tie the service endpoint to the function
 

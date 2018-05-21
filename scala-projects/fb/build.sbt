@@ -2,7 +2,7 @@ name := "campaigns-service"
 
 version := "1.0"
 
-scalaVersion := "2.11.1"
+scalaVersion := "2.11.9"
 
 lazy val json4sVersion = "3.5.3"
 
@@ -32,4 +32,16 @@ libraryDependencies ++= Seq(
     "com.github.finagle" %% "finch-core" % "0.17.0",
     "com.github.finagle" %% "finch-circe" % "0.17.0",
     "io.circe" %% "circe-generic" % "0.9.0"
+)
+
+// dobbie for postgres connection
+
+scalacOptions += "-Ypartial-unification" // 2.11.9+
+
+lazy val doobieVersion = "0.5.2"
+
+libraryDependencies ++= Seq(
+  "org.tpolecat" %% "doobie-core"     % doobieVersion,
+  "org.tpolecat" %% "doobie-postgres" % doobieVersion,
+  "org.tpolecat" %% "doobie-specs2"   % doobieVersion
 )
